@@ -1,3 +1,3 @@
 # attempt
 
-watafak mazafak suka blyat
+Совместная программа Деревянка Андрея и Перепелицы Максима.
