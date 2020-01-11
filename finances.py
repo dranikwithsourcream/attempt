@@ -45,9 +45,12 @@ def operations():
 # статистика
 def statistics():
     print('Напишите день, статистику о котором вы хотите узнать.')
-
     answer = input()
-
+    cur.execute("SELECT * FROM finances WHERE day={0}".format(answer))
+    print(' День' + '  Сумма')
+    print('  \/' + '    \/')
+    print(cur.fetchone())
+    con.commit()
 # вступление
 def intro():
     print('1 - Операции со средствами.')
