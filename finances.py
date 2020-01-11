@@ -38,26 +38,20 @@ def operations():
         reduce_money()
     elif answer == 'back':
         intro()
-        con.close()
     else:
         print('Неверный ответ. Попробуйте ещё раз.')
-        con.close()
         operations()
 
 # статистика
 def statistics():
-    print('Выберите статистику:')
-    print('1 - За 1 день.')
-    print('2 - За 3 дня.')
-    print('3 - За 7 дней.')
-    print('4 - За 14 дней.')
-    print('5 - За 31 день.')
+    print('Напишите день, статистику о котором вы хотите узнать.')
+
     answer = input()
 
 # вступление
 def intro():
     print('1 - Операции со средствами.')
-    print('2 - Статистика.')
+    print('2 - Когда и сколько потратил.')
     answer = input()
     if answer == str(1):
         operations()
