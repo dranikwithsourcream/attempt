@@ -7,7 +7,7 @@ cur.execute("""CREATE TABLE IF NOT EXISTS finances (
                 amount text
                 )""")
 
-# функция добавления денег
+# функция добавления денег.
 def add_money():
     print('Впишите *день и потом сумму*, которую хотите добавить в таблицу.\nПример: 2<enter>, 6.90<enter>\nОбязательно в таком порядке.')
 
