@@ -9,11 +9,14 @@ cur.execute("""CREATE TABLE IF NOT EXISTS finances (
 
 # функция добавления денег.
 def add_money():
+    print('(напишите "back" чтобы возвратиться.)')
     print('Впишите *день и потом сумму*, которую хотите добавить в таблицу.\nПример: 2<enter>, 6.90<enter>\nОбязательно в таком порядке.')
-
     day = input()
+    if day == 'back':
+        operations()
     amount = input()
-
+    if amount == 'back':
+        operations()
     cur.execute("INSERT INTO finances VALUES ({0} , {1})".format(day, amount))
     con.commit()
     operations()
@@ -24,7 +27,7 @@ def reduce_money():
 
 # операции с деньгами в целом
 def operations():
-    print('(напишите "0" чтобы возвратиться.)')
+    print('(напишите "back" чтобы возвратиться.)')
     print('Выберите операцию:')
     print('1 - Добавить кол-во потраченных средств.')
     print('2 - Удалить кол-во потраченных средств.')
@@ -33,7 +36,7 @@ def operations():
         add_money()
     elif answer == str(2):
         reduce_money()
-    elif answer == '0':
+    elif answer == 'back':
         intro()
         con.close()
     else:
