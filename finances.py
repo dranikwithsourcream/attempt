@@ -1,14 +1,22 @@
 import os
 import sqlite3
+con = sqlite3.connect('finances.db')
+cur = con.cursor()
+cur.execute("""CREATE TABLE IF NOT EXISTS finances (
+                day text,
+                amount text
+                )""")
 
 # функция добавления денег
 def add_money():
-    con = sqlite3.connect('database.db')
-    cur = con.cursor()
-    cur.execute("""CREATE TABLE finances (
-                day integer,
-                amount real
-                )""")
+    print('Впишите *день и потом сумму*, которую хотите добавить в таблицу.\nПример: 2<enter>, 6.90<enter>\nОбязательно в таком порядке.')
+
+    day = input()
+    amount = input()
+
+    cur.execute("INSERT INTO finances VALUES ({0} , {1})".format(day, amount))
+    con.commit()
+    operations()
 
 # функция уменьшения денег
 def reduce_money():
@@ -16,6 +24,7 @@ def reduce_money():
 
 # операции с деньгами в целом
 def operations():
+    print('(напишите "0" чтобы возвратиться.)')
     print('Выберите операцию:')
     print('1 - Добавить кол-во потраченных средств.')
     print('2 - Удалить кол-во потраченных средств.')
@@ -24,10 +33,12 @@ def operations():
         add_money()
     elif answer == str(2):
         reduce_money()
-    elif answer == 'назад':
+    elif answer == '0':
         intro()
+        con.close()
     else:
         print('Неверный ответ. Попробуйте ещё раз.')
+        con.close()
         operations()
 
 # статистика
