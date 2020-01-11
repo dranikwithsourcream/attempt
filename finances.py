@@ -1,13 +1,26 @@
 from colorama import Fore, Back, Style
 import os
 
-#Back.GREEN + Fore.BLACK +
+def add_money():
+    print(1)
 
-def cls():
-    os.system('cls' if os.name=='nt' else 'clear')
+def reduce_money():
+    print(2)
 
 def operations():
     print('Выберите операцию:')
+    print('1 - Добавить кол-во потраченных средств.')
+    print('2 - Удалить кол-во потраченных средств.')
+    answer = input()
+    if answer == str(1):
+        add_money()
+    elif answer == str(2):
+        reduce_money()
+    elif answer == 'назад':
+        intro()
+    else:
+        print('Неверный ответ. Попробуйте ещё раз.')
+        operations()
 
 def statistics():
     print('Выберите статистику:')
@@ -16,6 +29,8 @@ def statistics():
     print('3 - За 7 дней.')
     print('4 - За 14 дней.')
     print('5 - За 31 день.')
+    answer = input()
+
 
 def intro():
     print('1 - Операции со средствами.')
@@ -28,4 +43,5 @@ def intro():
     else:
         print('Неверный ответ. Попробуйте ещё раз.')
         intro()
+
 intro()
