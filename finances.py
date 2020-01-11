@@ -1,12 +1,14 @@
-from colorama import Fore, Back, Style
 import os
 
+# функция добавления денег
 def add_money():
     print(1)
 
+# функция уменьшения денег
 def reduce_money():
     print(2)
 
+# операции с деньгами в целом
 def operations():
     print('Выберите операцию:')
     print('1 - Добавить кол-во потраченных средств.')
@@ -22,6 +24,7 @@ def operations():
         print('Неверный ответ. Попробуйте ещё раз.')
         operations()
 
+# статистика
 def statistics():
     print('Выберите статистику:')
     print('1 - За 1 день.')
@@ -31,7 +34,7 @@ def statistics():
     print('5 - За 31 день.')
     answer = input()
 
-
+# вступление
 def intro():
     print('1 - Операции со средствами.')
     print('2 - Статистика.')
