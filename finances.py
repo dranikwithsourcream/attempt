@@ -1,12 +1,17 @@
 import os
 
-# функция добавления денег
-def add_money():
-    print(1)
-
-# функция уменьшения денег
-def reduce_money():
-    print(2)
+# вступление
+def intro():
+    print('1 - Операции со средствами.')
+    print('2 - Статистика.')
+    answer = input()
+    if answer == str(1):
+        operations()
+    elif answer == str(2):
+        statistics()
+    else:
+        print('Неверный ответ. Попробуйте ещё раз.')
+        intro()
 
 # операции с деньгами в целом
 def operations():
@@ -24,27 +29,21 @@ def operations():
         print('Неверный ответ. Попробуйте ещё раз.')
         operations()
 
+# функция добавления денег
+def add_money():
+    print(1)
+
+# функция уменьшения денег
+def reduce_money():
+    print(2)
+
 # статистика
 def statistics():
     print('Выберите статистику:')
     print('1 - За 1 день.')
     print('2 - За 3 дня.')
-    print('3 - За 7 дней.')
-    print('4 - За 14 дней.')
-    print('5 - За 31 день.')
+    print('3 - За неделю.')
+    print('4 - За месяц.')
     answer = input()
-
-# вступление
-def intro():
-    print('1 - Операции со средствами.')
-    print('2 - Статистика.')
-    answer = input()
-    if answer == str(1):
-        operations()
-    elif answer == str(2):
-        statistics()
-    else:
-        print('Неверный ответ. Попробуйте ещё раз.')
-        intro()
 
 intro()
