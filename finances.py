@@ -1,8 +1,14 @@
 import os
+import sqlite3
 
 # функция добавления денег
 def add_money():
-    print('add')
+    con = sqlite3.connect('database.db')
+    cur = con.cursor()
+    cur.execute("""CREATE TABLE finances (
+                day integer,
+                amount real
+                )""")
 
 # функция уменьшения денег
 def reduce_money():
