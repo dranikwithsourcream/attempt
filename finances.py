@@ -31,11 +31,11 @@ def operations():
 
 # функция добавления денег
 def add_money():
-    print(1)
+    print('add')
 
 # функция уменьшения денег
 def reduce_money():
-    print(2)
+    print('reduce')
 
 # статистика
 def statistics():
