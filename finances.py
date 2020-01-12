@@ -120,7 +120,7 @@ def rules():
 
 # очистка всех данных
 def clear_db():
-    print('Вы действительно хоттите удалить все записи?')
+    print('Вы действительно хотите удалить все записи?')
     print('Если вы уверены напишите DELETE')
     print('Чтобы вернуться назад напишите back')
     answer = input()
@@ -134,7 +134,7 @@ def intro():
     print(Back.YELLOW + Fore.BLACK + 'Выберите функцию.')
     print(Back.CYAN + Fore.BLACK + '1 - Операции со средствами.')
     print(Back.CYAN + Fore.BLACK + '2 - Когда и сколько потратил.')
-    print(Back.GREEN + Fore.BLACK + '3 - Очистить базу данныхю')
+    print(Back.GREEN + Fore.BLACK + '3 - Очистить базу данных.')
     print('4 - Правила использования программы.')
     print(Back.BLACK + Fore.WHITE)
     answer = input()
