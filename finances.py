@@ -10,7 +10,7 @@ con = sqlite3.connect('finances.db')
 cur = con.cursor()
 cur.execute("""CREATE TABLE IF NOT EXISTS finances (
                 day text,
-                amount text
+                amount REAL
                 )""")
 
 #удаление в консоле
