@@ -70,6 +70,11 @@ def operations():
         time.sleep(2)
         operations()
 
+#fetchall
+def fetchall():
+    cur.execute("SELECT * FROM finances")
+    print(cur.fetchall())
+
 # статистика
 def statistics():
     print(Back.GREEN + Fore.BLACK + '                   Статистика.                       ')
@@ -124,4 +129,4 @@ def intro():
         time.sleep(2)
         intro()
 
-intro()
+fetchall()
