@@ -33,6 +33,8 @@ def reduce_money():
     print(Back.BLACK + Fore.WHITE)
     day = input()
     print(Back.BLACK + Fore.WHITE)
+    if day == 'back':
+        operations()
     cur.execute("DELETE from finances WHERE day = {0}".format(day))
     con.commit()
     print(Back.CYAN + Fore.BLACK + 'Информация успешно удалена.')
