@@ -9,13 +9,22 @@ init()
 con = sqlite3.connect('finances.db')
 cur = con.cursor()
 cur.execute("""CREATE TABLE IF NOT EXISTS finances (
-                day text,
-                amount text
+                day integer,
+                amount real
                 )""")
 
 #удаление в консоле
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')
+
+def sum_money():
+    print(Back.YELLOW + Fore.BLACK + '(напишите "back" чтобы возвратиться.)')
+    print(Back.CYAN + Fore.BLACK + '  Сумма, потраченная за всё время.   ')
+    cur.execute("SELECT sum(amount) FROM finances")
+    print(Back.CYAN + Fore.BLACK + str((cur.fetchone())))
+    con.commit()
+    time.sleep(2)
+    statistics()
 
 # функция добавления денег.
 def add_money():
@@ -75,8 +84,25 @@ def fetchall():
     cur.execute("SELECT * FROM finances")
     print(cur.fetchall())
 
-# статистика
 def statistics():
+    print(Back.YELLOW + Fore.BLACK + '(напишите "back" чтобы возвратиться.)')
+    print(Back.GREEN + Fore.BLACK + '               Статистика.            ')
+    print(Back.CYAN + Fore.BLACK + '1 - Сколько потрачено за определённый день')
+    print(Back.CYAN + Fore.BLACK + '2 - Сколько потрачено за всё время')
+    answer = input()
+    if answer == str(1):
+        one_day_money()
+    elif answer == str(2):
+        sum_money()
+    elif answer == 'back':
+        intro()
+    else:
+        print(Back.RED + Fore.BLACK + 'Неверный ответ. Попробуйте ещё раз.')
+        time.sleep(2)
+        statistics()
+
+# статистика
+def one_day_money():
     print(Back.GREEN + Fore.BLACK + '                   Статистика.                       ')
     print(Back.YELLOW + Fore.BLACK + 'Напишите день, статистику о котором вы хотите узнать.')
     print(Back.BLACK + Fore.WHITE)
@@ -113,7 +139,7 @@ def rules():
 def intro():
     print(Back.YELLOW + Fore.BLACK + 'Выберите функцию.')
     print(Back.CYAN + Fore.BLACK + '1 - Операции со средствами.')
-    print(Back.CYAN + Fore.BLACK + '2 - Когда и сколько потратил.')
+    print(Back.CYAN + Fore.BLACK + '2 - Статистика.')
     print(Back.GREEN + Fore.BLACK + '3 - Правила использования программы.')
     print(Back.BLACK + Fore.WHITE)
     answer = input()
@@ -129,4 +155,4 @@ def intro():
         time.sleep(2)
         intro()
 
-fetchall()
+intro()
