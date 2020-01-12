@@ -4,14 +4,9 @@ import sqlite3
 from colorama import Fore, Back, Style
 from colorama import init
 init()
-
-con = sqlite3.connect('finances.db')
-cur = con.cursor()
-cur.execute("""CREATE TABLE IF NOT EXISTS finances (
-                day text,
-                amount text
-                )""")
-
+#удаление в консоле
+def cls():
+    os.system('cls' if os.name=='nt' else 'clear')
 # функция добавления денег.
 def add_money():
     print(Back.YELLOW + Fore.BLACK + '(напишите "back" чтобы возвратиться.)')
@@ -25,7 +20,6 @@ def add_money():
     cur.execute("INSERT INTO finances VALUES ({0} , {1})".format(day, amount))
     con.commit()
     operations()
-
 # функция уменьшения денег
 def reduce_money():
     print(Back.RED + Fore.BLACK + 'Функция временно недоступна.')
@@ -48,9 +42,9 @@ def operations():
         print(Back.RED + Fore.BLACK + 'Неверный ответ. Попробуйте ещё раз.')
         time.sleep(2)
         operations()
-
 # статистика
 def statistics():
+    print(Back.GREEN + Fore.BLACK + '                   Статистика.                        ')
     print(Back.YELLOW + Fore.BLACK + 'Напишите день, статистику о котором вы хотите узнать.')
     answer = input()
     cur.execute("SELECT * FROM finances WHERE day={0}".format(answer))
@@ -60,12 +54,11 @@ def statistics():
     con.commit()
     time.sleep(2)
     intro()
-
 #правила
 def rules():
-    print(Back.RED + Fore.BLACK + 'Функция временно недоступна.')
-    time.sleep(2)
-    intro()
+    print(Back.GREEN + Fore.BLACK + 'Правила использования программы.')
+    time.sleep(1)
+
 
 # вступление
 def intro():
@@ -84,5 +77,11 @@ def intro():
         print(Back.RED + Fore.BLACK + 'Неверный ответ. Попробуйте ещё раз.')
         time.sleep(2)
         intro()
-
+#подключение к дата базе
+con = sqlite3.connect('finances.db')
+cur = con.cursor()
+cur.execute("""CREATE TABLE IF NOT EXISTS finances (
+                day text,
+                amount text
+                )""")
 intro()
