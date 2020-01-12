@@ -3,9 +3,10 @@ import time
 import sqlite3
 from colorama import Fore, Back, Style
 from colorama import init
+
 init()
 
-#подключение к дата базе
+# подключение к дата базе
 con = sqlite3.connect('finances.db')
 cur = con.cursor()
 cur.execute("""CREATE TABLE IF NOT EXISTS finances (
@@ -13,14 +14,17 @@ cur.execute("""CREATE TABLE IF NOT EXISTS finances (
                 amount REAL
                 )""")
 
-#удаление в консоле
+
+# удаление в консоле
 def cls():
-    os.system('cls' if os.name=='nt' else 'clear')
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 
 # функция добавления денег.
 def add_money():
     print(Back.YELLOW + Fore.BLACK + '(напишите "back" чтобы возвратиться.)')
-    print(Back.YELLOW + Fore.BLACK + 'Впишите ' + Back.RED + Fore.BLACK + 'день и потом сумму' + Back.YELLOW + Fore.BLACK + ', которую хотите добавить в таблицу.\n' + Back.RED + Fore.BLACK + 'Пример: 2<enter>, 6.90<enter>\n' + Back.YELLOW + Fore.BLACK + 'Обязательно в таком порядке.')
+    print(
+        Back.YELLOW + Fore.BLACK + 'Впишите ' + Back.RED + Fore.BLACK + 'день и потом сумму' + Back.YELLOW + Fore.BLACK + ', которую хотите добавить в таблицу.\n' + Back.RED + Fore.BLACK + 'Пример: 2<enter>, 6.90<enter>\n' + Back.YELLOW + Fore.BLACK + 'Обязательно в таком порядке.')
     print(Back.BLACK + Fore.WHITE)
     day = input()
     print(Back.BLACK + Fore.WHITE)
@@ -34,6 +38,7 @@ def add_money():
     cur.execute("INSERT INTO finances VALUES ({0} , {1})".format(day, amount))
     con.commit()
     operations()
+
 
 # функция уменьшения денег
 def reduce_money():
@@ -49,6 +54,7 @@ def reduce_money():
     print(Back.CYAN + Fore.BLACK + 'Информация успешно удалена.')
     time.sleep(2)
     operations()
+
 
 # операции с деньгами в целом
 def operations():
@@ -70,10 +76,12 @@ def operations():
         time.sleep(2)
         operations()
 
-#fetchall
+
+# fetchall
 def fetchall():
     cur.execute("SELECT * FROM finances")
     print(cur.fetchall())
+
 
 # статистика
 def statistics():
@@ -93,7 +101,8 @@ def statistics():
     time.sleep(2)
     intro()
 
-#правила
+
+# правила
 def rules():
     print(Back.YELLOW + Fore.BLACK + '(напишите "back" чтобы возвратиться.)')
     print(Back.GREEN + Fore.BLACK + '   Правила использования программы.  ')
@@ -109,12 +118,24 @@ def rules():
         time.sleep(2)
         rules()
 
+# очистка всех данных
+def clear_db():
+    print('Вы действительно хоттите удалить все записи?')
+    print('Если вы уверены напишите DELETE')
+    print('Чтобы вернуться назад напишите back')
+    answer = input()
+    if answer == 'DELETE':
+        cur.execute("DROP TABLE finances")
+    else:
+        intro()
+
 # вступление
 def intro():
     print(Back.YELLOW + Fore.BLACK + 'Выберите функцию.')
     print(Back.CYAN + Fore.BLACK + '1 - Операции со средствами.')
     print(Back.CYAN + Fore.BLACK + '2 - Когда и сколько потратил.')
-    print(Back.GREEN + Fore.BLACK + '3 - Правила использования программы.')
+    print(Back.GREEN + Fore.BLACK + '3 - Очистить базу данныхю')
+    print('4 - Правила использования программы.')
     print(Back.BLACK + Fore.WHITE)
     answer = input()
     print(Back.BLACK + Fore.WHITE)
@@ -123,10 +144,13 @@ def intro():
     elif answer == str(2):
         statistics()
     elif answer == str(3):
+        clear_db()
+    elif answer == str(4):
         rules()
     else:
         print(Back.RED + Fore.BLACK + 'Неверный ответ. Попробуйте ещё раз.')
         time.sleep(2)
         intro()
 
-fetchall()
+
+intro()
