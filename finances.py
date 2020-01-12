@@ -10,7 +10,7 @@ init()
 con = sqlite3.connect('finances.db')
 cur = con.cursor()
 cur.execute("""CREATE TABLE IF NOT EXISTS finances (
-                day text,
+                day integer,
                 amount REAL
                 )""")
 
@@ -133,7 +133,7 @@ def clear_db():
 def intro():
     print(Back.YELLOW + Fore.BLACK + 'Выберите функцию.')
     print(Back.CYAN + Fore.BLACK + '1 - Операции со средствами.')
-    print(Back.CYAN + Fore.BLACK + '2 - Когда и сколько потратил.')
+    print(Back.CYAN + Fore.BLACK + '2 - Статистика.')
     print(Back.GREEN + Fore.BLACK + '3 - Очистить базу данных.')
     print('4 - Правила использования программы.')
     print(Back.BLACK + Fore.WHITE)
