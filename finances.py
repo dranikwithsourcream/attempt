@@ -85,21 +85,21 @@ def fetchall():
 
 # статистика
 def statistics():
-    print(Back.GREEN + Fore.BLACK + '                   Статистика.                       ')
-    print(Back.YELLOW + Fore.BLACK + 'Напишите день, статистику о котором вы хотите узнать.')
-    print(Back.BLACK + Fore.WHITE)
+    print(Back.YELLOW + Fore.BLACK + '(напишите "back" чтобы возвратиться.)')
+    print(Back.GREEN + Fore.BLACK + '               Статистика.            ')
+    print(Back.CYAN + Fore.BLACK + '1 - Сколько потрачено за определённый день')
+    print(Back.CYAN + Fore.BLACK + '2 - Сколько потрачено за всё время')
     answer = input()
-    print(Back.BLACK + Fore.WHITE)
-    if answer == 'back':
+    if answer == str(1):
+        one_day_money()
+    elif answer == str(2):
+        sum_money()
+    elif answer == 'back':
         intro()
-    cur.execute("SELECT * FROM finances WHERE day={0}".format(answer))
-    print(Back.CYAN + Fore.BLACK + ' День' + '  Сумма ')
-    print(Back.CYAN + Fore.BLACK + '  \/' + '    \/   ')
-    print(Back.CYAN + Fore.BLACK + str(cur.fetchone()))
-    con.commit()
-    print(Back.BLACK + Fore.WHITE)
-    time.sleep(2)
-    intro()
+    else:
+        print(Back.RED + Fore.BLACK + 'Неверный ответ. Попробуйте ещё раз.')
+        time.sleep(2)
+        statistics()
 
 
 # правила
