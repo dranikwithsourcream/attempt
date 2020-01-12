@@ -20,6 +20,16 @@ def cls():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
+def sum_money():
+    print(Back.YELLOW + Fore.BLACK + '(напишите "back" чтобы возвратиться.)')
+    print(Back.CYAN + Fore.BLACK + '  Сумма, потраченная за всё время.   ')
+    cur.execute("SELECT sum(amount) FROM finances")
+    print(Back.CYAN + Fore.BLACK + str((cur.fetchone())))
+    con.commit()
+    time.sleep(2)
+    statistics()
+
+
 # функция добавления денег.
 def add_money():
     print(Back.YELLOW + Fore.BLACK + '(напишите "back" чтобы возвратиться.)')
@@ -128,6 +138,11 @@ def clear_db():
         cur.execute("DROP TABLE finances")
     else:
         intro()
+
+def one_day_money():
+    print(Back.GREEN + Fore.BLACK + '                   Статистика.                       ')
+    print(Back.YELLOW + Fore.BLACK + 'Напишите день, статистику о котором вы хотите узнать.')
+    print(Back.BLACK + Fore.WHITE)
 
 # вступление
 def intro():
