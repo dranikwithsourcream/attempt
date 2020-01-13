@@ -19,7 +19,8 @@ def sum_money():
     print('(напишите "back" чтобы возвратиться.)')
     print('  Сумма, потраченная за всё время.   ')
     cur.execute("SELECT sum(amount) FROM finances")
-    print((cur.fetchone()))
+    if cur.fetchone() == (None,):
+        print('Ничего не потрачено')
     con.commit()
     time.sleep(2)
     statistics()
