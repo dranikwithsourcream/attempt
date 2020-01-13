@@ -6,10 +6,12 @@ import sqlite3
 #подключение к дата базе
 con = sqlite3.connect('finances.db')
 cur = con.cursor()
-cur.execute("""CREATE TABLE IF NOT EXISTS finances (
-                day integer,
-                amount real
-                )""")
+#creating table
+def create_table():
+    cur.execute("""CREATE TABLE IF NOT EXISTS finances (
+                    day integer,
+                    amount real
+                    )""")
 
 def sum_money():
     print('(напишите "back" чтобы возвратиться.)')
@@ -18,7 +20,10 @@ def sum_money():
     con.commit()
     if cur.fetchone() == (None,):
         print('Ничего не потрачено.')
-    else
+    else:
+        cur.execute("SELECT sum(amount) FROM finances")
+        con.commit()
+        print(cur.fetchone())
     time.sleep(2)
     statistics()
 
@@ -71,9 +76,9 @@ def operations():
         operations()
 
 #fetchall
-def fetchall():
-    cur.execute("SELECT * FROM finances")
-    print(cur.fetchall())
+#def fetchall():
+#    cur.execute("SELECT * FROM finances")
+#    print(cur.fetchall())
 
 def statistics():
     print('(напишите "back" чтобы возвратиться.)')
@@ -114,7 +119,8 @@ def clear_db():
     print('Если вы уверены напишите "DELETE"')
     answer = input()
     if answer == 'DELETE':
-        cur.execute("DROP TABLE finances")
+        cur.execute('DROP TABLE finances')
+        create_table()
         time.sleep(1)
         print('Данные успешно удалены.')
         operations()
@@ -159,4 +165,5 @@ def intro():
         time.sleep(1)
         intro()
 
+create_table()
 intro()
