@@ -11,17 +11,14 @@ cur.execute("""CREATE TABLE IF NOT EXISTS finances (
                 amount real
                 )""")
 
-#удаление в консоле
-def cls():
-    os.system('cls' if os.name=='nt' else 'clear')
-
 def sum_money():
     print('(напишите "back" чтобы возвратиться.)')
     print('  Сумма, потраченная за всё время.   ')
     cur.execute("SELECT sum(amount) FROM finances")
-    if cur.fetchone() == (None,):
-        print('Ничего не потрачено')
     con.commit()
+    if cur.fetchone() == (None,):
+        print('Ничего не потрачено.')
+    else
     time.sleep(2)
     statistics()
 
