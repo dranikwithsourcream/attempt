@@ -23,8 +23,10 @@ def sum_money():
     else:
         cur.execute("SELECT sum(amount) FROM finances")
         con.commit()
-        print(cur.fetchone())
+        print('Вы потратили за всё время: ' + str(cur.fetchone()[0]))
+#       print('Вы потратили за всё время:' + str(cur.fetchone()[0]))
     time.sleep(2)
+    print('\n')
     statistics()
 
 # функция добавления денег.
@@ -105,12 +107,14 @@ def one_day_money():
     if answer == 'back':
         statistics()
     cur.execute("SELECT * FROM finances WHERE day={0}".format(answer))
-    print(' День' + '  Сумма ')
-    print('  \/' + '    \/   ')
-    print(cur.fetchone())
+    print('День:' + str(cur.fetchone()[0]))
+    con.commit()
+    cur.execute("SELECT * FROM finances WHERE day={0}".format(answer))
+    print('Сумма:' + str(cur.fetchone()[1]))
     con.commit()
     time.sleep(2)
-    intro()
+    print('\n')
+    statistics()
 
 # очистка всех данных
 def clear_db():
@@ -167,3 +171,4 @@ def intro():
 
 create_table()
 intro()
+
