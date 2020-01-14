@@ -3,15 +3,18 @@ import time
 import sys
 import sqlite3
 
-#подключение к дата базе
+# подключение к дата базе
 con = sqlite3.connect('finances.db')
 cur = con.cursor()
-#creating table
+
+
+# creating table
 def create_table():
     cur.execute("""CREATE TABLE IF NOT EXISTS finances (
                     day integer,
                     amount real
                     )""")
+
 
 def sum_money():
     print('(напишите "back" чтобы возвратиться.)')
@@ -27,10 +30,12 @@ def sum_money():
     time.sleep(2)
     statistics()
 
+
 # функция добавления денег.
 def add_money():
     print('(напишите "back" чтобы возвратиться.)')
-    print('Впишите день и потом сумму, которую хотите добавить в таблицу.\nПример: 2<enter>, 6.90<enter>\nОбязательно в таком порядке.')
+    print(
+        'Впишите день и потом сумму, которую хотите добавить в таблицу.\nПример: 2<enter>, 6.90<enter>\nОбязательно в таком порядке.')
     day = input()
     if day == 'back':
         operations()
@@ -40,6 +45,7 @@ def add_money():
     cur.execute("INSERT INTO finances VALUES ({0} , {1})".format(day, amount))
     con.commit()
     operations()
+
 
 # функция уменьшения денег
 def reduce_money():
@@ -53,6 +59,7 @@ def reduce_money():
     print('Информация успешно удалена.')
     time.sleep(2)
     operations()
+
 
 # операции с деньгами в целом
 def operations():
@@ -75,8 +82,9 @@ def operations():
         time.sleep(2)
         operations()
 
-#fetchall
-#def fetchall():
+
+# fetchall
+# def fetchall():
 #    cur.execute("SELECT * FROM finances")
 #    print(cur.fetchall())
 
@@ -97,6 +105,7 @@ def statistics():
         time.sleep(2)
         statistics()
 
+
 # статистика
 def one_day_money():
     print('                   Статистика.                       ')
@@ -111,6 +120,7 @@ def one_day_money():
     con.commit()
     time.sleep(2)
     intro()
+
 
 # очистка всех данных
 def clear_db():
@@ -127,7 +137,8 @@ def clear_db():
     else:
         operations()
 
-#правила
+
+# правила
 def rules():
     print('(напишите "back" чтобы возвратиться.)')
     print('   Правила использования программы.  ')
@@ -140,6 +151,7 @@ def rules():
         print('Неверный ответ. Попробуйте ещё раз.')
         time.sleep(2)
         rules()
+
 
 # вступление
 def intro():
@@ -164,6 +176,7 @@ def intro():
         print('Неверный ответ. Попробуйте ещё раз.')
         time.sleep(1)
         intro()
+
 
 create_table()
 intro()
