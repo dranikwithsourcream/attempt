@@ -13,8 +13,7 @@ def create_table():
                     amount real
                     )""")
 
-def sum_money():
-    print('(напишите "back" чтобы возвратиться.)')
+def all_time_spent_money():
     print('  Сумма, потраченная за всё время.   ')
     cur.execute("SELECT sum(amount) FROM finances")
     con.commit()
@@ -23,8 +22,10 @@ def sum_money():
     else:
         cur.execute("SELECT sum(amount) FROM finances")
         con.commit()
-        print('Вы потратили за всё время: ' + str(cur.fetchone()[0]))
-#       print('Вы потратили за всё время:' + str(cur.fetchone()[0]))
+        print('Вы потратили ' + str(cur.fetchone()[0]))
+        cur.execute("SELECT MAX(day) FROM finances")
+        con.commit()
+        print('За ' + str(cur.fetchone()[0]) + ' дня.')
     time.sleep(2)
     print('\n')
     statistics()
@@ -91,7 +92,7 @@ def statistics():
     if answer == str(1):
         one_day_money()
     elif answer == str(2):
-        sum_money()
+        all_time_spent_money()
     elif answer == 'back':
         intro()
     else:
@@ -171,4 +172,3 @@ def intro():
 
 create_table()
 intro()
-
